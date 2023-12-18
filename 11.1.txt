@@ -1,0 +1,5 @@
+public Service getService() { 
+    if (service == null)
+        service = new MyServiceImpl(...); // Good enough default for most cases?
+            return service;
+ }

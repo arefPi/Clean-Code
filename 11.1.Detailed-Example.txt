@@ -1,0 +1,46 @@
+public void main {
+    PaymentProcessor paymentProcessor = new paymentProcessor();
+    paymentProcessor.pay(...)
+}
+
+public class PaymentProcessor {
+    private PaymentGateway paymentGateway;
+
+    public PaymentProcessor() {
+        this.paymentGateway = new MellatPaymentGateway();
+    }
+
+    public void processPayment(double amount) {
+        paymentGateway.pay(amount);
+    }
+
+    private getPaymentGateway() {
+        if (paymentGateway != null)
+            return paymentGateway;
+        
+        this.paymentGateway = getPaymentGateway(...);
+        return paymentGateway;
+    }
+}
+
+class MellatPaymentGateway impelement PaymentGateway {
+    public void pay(double amount) {
+        // Pay amount logic
+    }
+}
+
+interface PaymentGateway {
+    void pay(double amount);
+}
+
+What we are doing here ?
+ Lazy Evelauation/Initializaion/Loading. Reduce overhead of construction unless we actually use the object 
+ so our startup times can be faster as a result.ensure that null is never returned.
+
+
+Cons fo mixed construction logic in with normal runtime processing.
+- Hard coded dependecy on MyServiceImpl. Can't compile with out resolving this dependency.
+- MyServiceImpl even if we never actually use an object of this type at runtime.
+- If MyServiceImpl be a heavyweight/expensive/compelex object, we should mock it for test.
+
+If we are diligent about building well-formed and robust systems, we should never let little, convenient idioms lead to modularity breakdown.
